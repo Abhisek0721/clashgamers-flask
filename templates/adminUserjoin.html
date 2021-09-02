@@ -1,0 +1,56 @@
+{% extends 'adminBase.html' %}
+
+{% block title %}Userjoin{% endblock %}
+
+{% block content %}
+<div id="Userjoin" class="container-xxl" style="margin-top: 5%;">
+    <h3>Userjoin :</h3>
+    <div class="container-sm" style="margin-top: 20px;"> 
+        <p>
+            <a class="btn btn-dark" data-bs-toggle="collapse" href="#seeAllUserjoin" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">See all Paid Participants</a>
+        </p>
+        <div class="row">
+            <div class="col">
+                <div class="collapse multi-collapse" id="seeAllUserjoin">
+                    <div class="card card-body">
+                        <table class="table table-dark table-striped">
+                            <thead style="text-align: center;">
+                              <tr>
+                                <th scope="col">#Id</th>
+                                <th scope="col">Orderid</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">CountryCode</th>
+                                <th scope="col">PhoneNo</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Datetime</th>
+                                <th scope="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody style="text-align: center;">
+                            {% for user in userjoin %}
+                            <tr>
+                                <th scope="row">{{user.Id}}</th>
+                                <td>{{user.Orderid}}</td>
+                                <td>{{user.Username}}</td>
+                                <td>{{user.Name}}</td>
+                                <td>{{user.CountryCode}}</td>
+                                <td>{{user.PhoneNo}}</td>
+                                <td>{{user.Email}}</td>
+                                <td>{{eachAcc.Datetime}}</td>
+                                <td>
+                                    <div class="col">
+                                        <button type="button" class="btn btn-danger" name="action">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

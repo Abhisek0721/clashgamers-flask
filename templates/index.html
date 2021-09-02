@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clash Gamers - Home</title>
+    <link rel="stylesheet" href="./static/css/style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages() %}  
+        {% if messages %}  
+            {% for message in messages %}  
+                <p>{{ message }}</p>  
+            {% endfor %}
+        {% endif %}  
+    {% endwith %}
+    <nav>
+        <div class="container nav-wrapper">
+           <div class="logo">
+               <a href="#"><img src="./static/img/CLASH GAMER.png" alt="logo"></a>
+               <span><strong>Clash Gamers</strong></span>
+           </div>
+           <div class="toggle" id="toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+           <ul class="nav-list">
+               <li class="active">
+                   <a href="./">Home</a>
+               </li>
+               <li>
+                   <a href="#Join">Join</a>
+               </li>
+                <li>
+                    <a href="#Contact">Contacts</a>
+                </li>
+                {% if auth != True %}
+                <li>
+                    <a href="./login"><button class="btn">Login</button></a>
+                </li>
+                <li>
+                    <a href="./signup"><button class="btn">Signup</button></a>
+                </li>
+                {% endif %}
+                {% if auth == True %}
+                <li>
+                    <a id="profile-link">
+                        <i class="fas fa-user-circle"></i>
+                        {{name}}
+                    </a>
+                </li>
+                <li>
+                    <a href="./logout"><button class="btn">Logout</button></a>
+                </li>
+                {% endif %}
+           </ul>
+        </div>
+    </nav>
+    <main>
+        <div>
+            <h1>Welcome 
+                {% if auth == True %} 
+                    {{name}} 
+                {% else %} 
+                    Clash Gamers 
+                {% endif %}
+            </h1>
+            <p>We create room using custom card.
+                The last man standing in a match gets <a href="#Join">price</a>.
+            </p>
+        </div>
+        {% if auth != True %}
+        <div class="gap">
+            <h1>How can you participate?</h1>
+            <p>
+                You just need to <a href="./signup">create account</a> and join our whatsapp group. <br>
+                We shall let you know in our whatsapp group when to participate in freefire match.
+            </p>
+        </div>
+        {% endif %}
+        <div class="gap" id="Join">
+            <h1>Match's Plan that we provide in freefire</h1>
+            <div class="boxes">
+                <div class="box">
+                    <div class="freefireImg">
+                        <img src="./static/img/Garena-Free-Fire.jpg" alt="freefireImg">
+                    </div>
+                    <div class="boxTitle"><b>Free Plan</b></div>
+                    <div class="points">
+                        <li>Entry fees Rs.0 (free)</li>
+                        <li>47 gamers can participate.</li>
+                        <li>First Price Rs.30.</li>
+                    </div>
+                    {% if auth == True %}
+                    <div>
+                        <a href="https://chat.whatsapp.com/FTV5LLngYlhLxuSU9TeSMp" target="_blank"><button class="joinBtn">Join</button></a>
+                    </div>
+                    {% endif %}
+                    {% if auth != True %}
+                    <div>
+                        <a href="./signup" target="_blank"><button class="joinBtn">Join</button></a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="box">
+                    <div class="freefireImg">
+                        <img src="./static/img/Garena-Free-Fire.jpg" alt="freefireImg">
+                    </div>
+                    <div class="boxTitle"><b>With Entry fee</b></div>
+                    <div class="points">
+                        <li>Entry fees Rs.29</li>
+                        <li>47 gamers can participate.</li>
+                        <li>First Price Rs.200.</li>
+                    </div>
+                    {% if joinMsg != None %}
+                        <p style="color: crimson;text-align: center;">{{joinMsg}}</p>
+                    {% endif %}
+                    {% if auth == True %}
+                    <div>
+                        <a href="./join"><button class="joinBtn">Join</button></a>
+                    </div>
+                    {% endif %}
+                    {% if auth != True %}
+                    <div>
+                        <a href="./signup" target="_blank"><button class="joinBtn">Join</button></a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="gap" id="Contact">
+            <h1>Contact Us:</h1>
+            <form method="POST" action="./contact" accept-charset="UTF-8">
+                <div class="contact-form">
+                    <div class="contact-col">
+                        <label for="title">Title :</label>
+                        <input type="text" class="form-control" name="title" required>
+                    </div>
+                    <div class="contact-col">
+                        <label for="email">Your Email :</label>
+                        <input type="text" class="form-control" name="email" required>
+                    </div>
+                    <div class="contact-col">
+                        <label for="contact_msg">Message :</label>
+                        <textarea class="contact_msg" id="contact_msg" name="contact_msg" rows="5" required></textarea>
+                    </div>
+                    <a href="./contact"><button class="joinBtn" style="left: 0%;">Send</button></a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <b>&copy; <a href="./" style="text-decoration: none; color: grey;">Clash Gamer</a></b>
+    </footer>
+
+    <script src="./static/js/index.js"></script>
+</body>
+
+</html>

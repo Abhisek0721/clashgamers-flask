@@ -1,0 +1,6 @@
+authy
+flask
+flask_sqlalchemy
+instamojo_wrapper
+gunicorn
+

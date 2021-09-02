@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Clash Gamers - SignUp</title>
+	<meta charset="utf-8">
+	<link href="/static/img/logo/favicon.ico" rel="icon">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<!-- <link rel="stylesheet" type="text/css" href="/static/css/avtar.css"> -->
+</head>
+
+<body>
+
+	<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<!-- <script src="/static/js/jqueries.js"></script> -->
+
+	<script type="text/javascript">
+		function checkPassword(form) {
+			var password1 = form.Password.value;
+			var password2 = form.RetypePassword.value;
+			if (password1 != password2) {
+				alert("\n Your Password doesn't match with Confirm Password.\n Please try again.");
+				return false;
+			} else {
+				if (password1.length<8) {
+					alert("\n Your Password should not be less than 8 characters.");
+					return false;
+				} else {
+					return true;
+				};
+			};
+		};
+
+	</script>
+
+<div class="container">
+<br>  <h1 class="text-center my-4">Welcome to Clash Gamers</h1>
+<hr>
+
+<div class="row justify-content-center">
+<div class="col-md-6">
+<div class="card">
+<header class="card-header">
+	<a href="./login.html" class="float-right btn btn-outline-primary mt-1">Log in</a>
+	<h4 class="card-title mt-2">Sign up</h4>
+</header>
+<article class="card-body">
+	
+<form method="POST" onsubmit="return checkPassword(this);">
+	<div class="form-row">
+		<div class="col form-group">
+			<label>Name </label>   
+		  	<input type="text" class="form-control" name="name" required>
+		</div> <!-- form-group end.// -->
+	</div> <!-- form-row end.// -->
+
+	<div class="form-group">
+		<label>Phone Number</label>
+		<input type="number" class="form-control" name="phoneNo" required>
+	</div> <!-- form-group end.// -->
+
+	<div class="form-group">
+		<label class="form-check form-check-inline">
+		  <input class="form-check-input" type="radio" name="gender" value="Male" checked>
+		  <span class="form-check-label"> Male </span>
+		</label>
+		<label class="form-check form-check-inline">
+		  <input class="form-check-input" type="radio" name="gender" value="Female">
+		  <span class="form-check-label"> Female</span>
+		</label>
+	</div> <!-- form-group end.// -->
+
+	<div class="form-group">
+		<label>Create Password</label>
+	    <input class="form-control" type="password" name="Password" required>
+	</div> <!-- form-group end.// -->
+	<div class="form-group">
+		<label>Retype Password</label>
+	    <input class="form-control" type="password" name="RetypePassword" required>
+	</div> <!-- form-group end.// -->  
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+    </div> <!-- form-group// -->      
+    <!-- <small class="text-muted">By clicking the 'Sign Up' button, you confirm that you accept our <br> Terms of use and Privacy Policy.</small>                                        -->
+</form>
+</article> <!-- card-body end .// -->
+<div class="border-top card-body text-center">Have an account? <a href="./login.html">Log In</a></div>
+<div class="text-center" style="margin-bottom: 10px;">Go to Home -> <a href="./index.html">Clash Gamer</a></div>
+</div> <!-- card.// -->
+</div> <!-- col.//-->
+
+
+</div> <!-- row.//-->
+
+
+</div> 
+<!--container end.//-->
+
+<br><br>
