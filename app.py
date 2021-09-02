@@ -2,8 +2,8 @@ from os import error, name
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, redirect, session, url_for, flash
 from datetime import datetime
-import random
 from instamojo_wrapper import Instamojo
+import requests, json, random
 
 
 app = Flask(__name__)
@@ -12,9 +12,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'super-secret'
 db = SQLAlchemy(app)
 
-Api_key = "test_38fe23ddde8c9e3c77abeb98718"
-Auth_token = "test_3af2934f39906237f43104d177e"
-api = Instamojo(api_key=Api_key, auth_token=Auth_token, endpoint="https://test.instamojo.com/api/1.1/")
+# Api_key = "test_38fe23ddde8c9e3c77abeb98718"
+# Auth_token = "test_3af2934f39906237f43104d177e"
+# api = Instamojo(api_key=Api_key, auth_token=Auth_token, endpoint="https://test.instamojo.com/api/1.1/")
 
 
 class Accounts(db.Model):
@@ -55,8 +55,6 @@ class Userjoin(db.Model):
     def __repr__(self) -> str:
         return f"{self.Id} - {self.Username}"
 
-
-
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if session.get('joinMsg') != "You have already join this plan.":
@@ -95,15 +93,15 @@ def signup():
 
     if request.method == "POST":
         name = request.form['name']
-        code = request.form['country_code']
-        phoneNo = request.form['phoneNo']
+        country_code = request.form['country_code']
+        phone_number = request.form['phoneNo']
         ff_id = request.form['ff_id']
         upi = request.form['upi']
         gender = request.form['gender']
         password = request.form['RetypePassword']
 
         check_username = Accounts.query.filter_by(Username=name).first()
-        check_phone = Accounts.query.filter_by(PhoneNo=phoneNo).first()
+        check_phone = Accounts.query.filter_by(PhoneNo=phone_number).first()
 
         if(check_phone or check_username):
             session['signupMSG'] = "Username or Phone Number has already been registered!"
@@ -196,25 +194,31 @@ def join():
         name = request.form["name"]
         email = request.form["email"]
         countryCode = user.CountryCode
-        username = user.Username
         phoneNo = user.PhoneNo
-        amount = 29
-        response = api.payment_request_create(
-            amount=amount,
-            purpose="Entry fees for freefire match",
-            buyer_name=name,
-            email=email,
-            phone=("+"+countryCode+phoneNo),
-            send_email=True,
-            send_sms=True,
-            redirect_url = "https://chat.whatsapp.com/FTV5LLngYlhLxuSU9TeSMp"
-        )
-        orderid = response["payment_request"]["id"]
-        userjoin = Userjoin(Orderid=orderid, Username=username, Name=name, CountryCode=countryCode, PhoneNo=phoneNo, Email=email)
-        db.session.add(userjoin)
-        db.session.commit()
-        return redirect(response["payment_request"]["longurl"])
-        
+
+        def createOrderId():
+            return "order_"+str(random.randrange(1000000,9000000))
+
+        url = "https://test.cashfree.com/api/v1/order/create"
+
+        payload={'appId': '939176d02f6d7c3b283979a3c71939',
+        'secretKey': '83d34fd586b0bb2ffe206cf22cd7d65449b7d6f7',
+        'orderId': createOrderId(),
+        'orderAmount': '29',
+        'orderCurrency': 'INR',
+        'orderNote': 'Entry fee in Clash Gamer',
+        'customerEmail': email,
+        'customerName': name,
+        'customerPhone': countryCode+phoneNo,
+        'returnUrl': 'https://github.com/Abhisek0721',
+        'returnUrl': 'https://github.com/Abhisek0721',
+        'notifyUrl': 'https://github.com/Abhisek0721'}
+        files=[
+        ]
+        headers = {}
+        response = requests.request("POST", url, headers=headers, data=payload, files=files)
+        print(response.text)
+        return redirect(eval(response.text)["paymentLink"])
     else:
         return render_template("pay.html")
 
