@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify - ClashGamers</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/css/forgotten.css">
+</head>
+<body>
+    
+    <div class="d-flex justify-content-center align-items-center container">
+        <div class="card py-5 px-3">
+            <h5 class="m-0">Forgotten Username/Password</h5><span class="mobile-text"> Enter your regestered phone number : </span>
+            <form method="POST" action="./forgotten" accept-charset="UTF-8">
+                <div class="fields">
+                    <div>
+                        <label for="phoneNo">Phone Number with country code:</label>
+                        <input type="tel" name="phoneNo" id="phone" placeholder="example: 916901438654" class="form-control" autofocus="" required>
+                        <input type="button" id="sendOtp" class="btn btn-danger" value="Send OTP">
+                        <p class="text-danger otp-msg">otp has been sended!</p>
+                    </div>
+                    <div>
+                        <input type="number" name="otp" id="otp" placeholder="OTP" class="form-control" autofocus="" required>
+                        <button type="submit" class="btn btn-success">Verify</button>
+                    </div>
+                </div>
+            </form>
+            <div class="text-center mt-5"><span class="d-block mobile-text">Go to Login Page</span><a href="./login" style="text-decoration: none;"><span class="font-weight-bold text-danger cursor">Login</span></a></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+        // Send OTP email jquery
+        $("#sendOtp").on("click", function(e){ 
+            e.preventDefault();
+            let phoneNo = $("#phone").val();
+            let otp = $("#otp").val();
+            $("#sendOtp").val("Resend OTP");
+            $('.otp-msg').css("display","block");
+            
+            $.ajax({
+            url  : "./forgotten",
+            type : "POST",
+            cache:false,
+            data : {'phoneNo':phoneNo,'otp':otp},
+            });  
+        });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% extends 'adminBase.html' %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block content %}
+<div id="Contacts" class="container-xxl" style="margin-top: 5%;">
+    <h3>Contacts :</h3>
+    <div class="container-sm" style="margin-top: 20px;"> 
+        <p>
+            <a class="btn btn-dark" data-bs-toggle="collapse" href="#seeAllContact" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">See all Contacts</a>
+        </p>
+        <div class="row">
+            <div class="col">
+                <div class="collapse multi-collapse" id="seeAllContact">
+                    <div class="card card-body">
+                        <table class="table table-dark table-striped">
+                            <thead style="text-align: center;">
+                              <tr>
+                                <th scope="col">#Id</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Message</th>
+                                <th scope="col">Datetime</th>
+                                <th scope="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody style="text-align: center;">
+                            {% for contact in contacts %}
+                            <tr>
+                                <th scope="row">{{contact.Id}}</th>
+                                <td>{{contact.Username}}</td>
+                                <td>{{contact.Title}}</td>
+                                <td>{{contact.Email}}</td>
+                                <td>{{contact.Message}}</td>
+                                <td>{{contact.Datetime}}</td>
+                                <td>
+                                    <div class="col">
+                                        <button type="button" class="btn btn-danger" name="action">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

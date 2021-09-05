@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/css/style.css">
+    <title>Clash Gamers - Join</title>
+</head>
+<body>
+    <div class="gap" style="display: flex; align-items: center; flex-direction: column;">
+        <h3>Register for e-sport match :</h3>
+        <form method="POST" action="./join" accept-charset="UTF-8">
+            <div class="contact-form" style="width: 50vw;">
+                <div class="contact-col">
+                    <label for="title">Name :</label>
+                    <input type="text" class="form-control" style="min-width: 100%;" name="name" required>
+                </div>
+                <div class="contact-col">
+                    <label for="email">Your Email :</label>
+                    <input type="text" class="form-control" style="min-width: 100%;" name="email" required>
+                </div>
+                <div class="contact-col">
+                    <label for="fees">Amount (entry fees) :</label>
+                    <input type="text" class="form-control" value="29" style="min-width: 100%;" name="fees" disabled>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                <a href="./" style="text-decoration: none; margin-top: 17px;"><label class="joinBtn" id="back">Back</label></a>
+                <button class="joinBtn">Pay</button>
+                </div>
+            </div>
+        </form>
+        </div>
+</body>
+</html>

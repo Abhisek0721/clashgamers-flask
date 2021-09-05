@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Clash Gamer - Login</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="./static/css/logIn-1.css">
+</head>
+
+<body>
+	{% if msg == "Account has been created successfully !" %}
+	<div class="alert" style="background-color: chartreuse;" id="alert-msg" role="alert">
+		{{msg}}
+	</div>
+	{% elif msg != None %}
+	<div class="alert" id="alert-msg" role="alert">
+		{{msg}}
+	</div>
+	{% endif %}
+<!---------------------------------------------------------------------------------------------------------------------------------->	
+	<div class="login-bg">
+		<div class="login-box">
+			<a href="./"><button class="close-btn" id="close_BTN">+</button></a>
+			<a href="./"> <img class="login-logo" src="./static/img/CLASH GAMER.png" alt="Clash Gamer"> </a>
+			<form method="POST" onsubmit="return validLogin(this);">
+				<input class="input-field" type="text" name="username" placeholder="username" required>
+				<input class="input-field" type="password" name="password" placeholder="password" required>
+				<button class="login-button" type="submit">Log In</button>
+			</form>
+
+			<div class="links">
+				<div>
+					Forgotten : <a class="link-a" href="./forgotten">Password/Username</a>
+				</div>
+				<div>
+					Don't have an account? <a class="link-a" href="./signup">Create Account</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Import Javascript Files -->
+	<script src="./static/js/validLogin.js"></script>
+</body>
+</html>
